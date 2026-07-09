@@ -106,7 +106,7 @@
         .header-meta {
             display: flex;
             align-items: center;
-            gap: clamp(15px, 4vw, 40px);
+            gap: clamp(15px, 3vw, 40px);
         }
 
         .location-ticker {
@@ -121,6 +121,21 @@
         }
 
         .location-ticker:hover {
+            color: var(--accent);
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
             color: var(--accent);
         }
 
@@ -330,6 +345,9 @@
             width: 100%;
             position: relative;
             cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: inherit;
         }
 
         .art-img-box {
@@ -340,7 +358,6 @@
             position: relative;
         }
 
-        /* Flexible aspect-ratio boxes optimized for fluid resizing */
         .ratio-tall { height: clamp(350px, 60vh, 680px); }
         .ratio-wide { height: clamp(250px, 45vh, 460px); }
 
@@ -369,6 +386,11 @@
             font-size: clamp(1.2rem, 4vw, 1.8rem);
             text-transform: uppercase;
             letter-spacing: -0.5px;
+            transition: color 0.3s;
+        }
+        
+        .art-card:hover .art-meta h3 {
+            color: var(--accent);
         }
 
         .art-meta span {
@@ -380,58 +402,32 @@
             padding: 4px 12px;
             border-radius: 30px;
         }
-
-        /* Fullscreen Glassmorphism Theater Modals */
-        #theater-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(4, 4, 6, 0.96);
-            backdrop-filter: blur(20px);
-            z-index: 20000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-            padding: 20px;
+        
+        .portfolio-cta-wrapper {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
-
-        #theater-modal.visible {
-            opacity: 1;
-            pointer-events: auto;
+        
+        .portfolio-cta-btn {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--text);
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 15px 40px;
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            transition: all 0.3s ease;
         }
-
-        .theater-view {
-            max-width: 100%;
-            max-height: 80vh;
-            transform: scale(0.96);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
-        }
-
-        #theater-modal.visible .theater-view {
-            transform: scale(1);
-        }
-
-        #theater-src {
-            width: 100%;
-            max-height: 80vh;
-            object-fit: contain;
-            display: block;
-        }
-
-        .theater-close {
-            position: absolute;
-            top: 25px;
-            right: 25px;
+        
+        .portfolio-cta-btn:hover {
+            background: var(--accent);
             color: #fff;
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-            z-index: 20001;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 85, 0.3);
         }
 
         /* Alternative Rock Overdrive Indicator Dock */
@@ -485,7 +481,7 @@
 
         /* Ultra-Premium Brutalist Conversion Footer */
         footer {
-            padding: 100px 4% 40px 4%;
+            padding: 60px 4% 40px 4%;
             background: #000;
             position: relative;
             z-index: 2;
@@ -555,7 +551,6 @@
             }
             .hero-statement p { margin: 0 auto 30px auto; }
             
-            /* Stacking the Hero Image and the Dashboard neatly on mobile */
             .hero-canvas-wrapper { 
                 height: auto; 
                 max-width: 500px; 
@@ -584,28 +579,32 @@
             .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
             .footer-action { align-items: center; }
         }
+        
+        /* Mobile Navbar adjustment */
+        @media (max-width: 768px) {
+            .location-ticker { display: none; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Continuous Background Marquee Movement -->
     <div class="marquee-bg">
         <div class="marquee-inner">NIEMAN PHOTOGRAPHY // RAW FRAMES // NIEMAN PHOTOGRAPHY // RAW FRAMES // </div>
     </div>
 
-    <!-- Fixed Header -->
     <header>
         <a href="#" class="brand-logo">Nieman<span>.</span></a>
         <div class="header-meta">
-            <!-- Easter Egg Location Trigger -->
             <div class="location-ticker" id="loc-trigger" onclick="unlockSecretPalette()"><i class="fas fa-map-marker-alt"></i> 26.7144° S, 27.0971° E</div>
+            
+            <a href="https://niemanphotography.myportfolio.com/" target="_blank" class="nav-link">Full Portfolio</a>
+            
             <a href="https://instagram.com/nieman__photography" target="_blank" class="instagram-badge">
                 <i class="fab fa-instagram"></i> Follow
             </a>
         </div>
     </header>
 
-    <!-- Editorial Hero Screen -->
     <section class="hero-section">
         <div class="hero-statement">
             <h1>Dynamic<br><em>optics</em>.</h1>
@@ -613,13 +612,10 @@
             <a href="#gallery" class="instagram-badge" style="background: var(--accent); color: white; display: inline-block;">Discover Index</a>
         </div>
         
-        <!-- Live Calibration Module -->
         <div class="hero-canvas-wrapper">
             <div class="hero-frame">
                 <img src="images/hero.jpg" id="target-hero" alt="Hero Photography Capture">
             </div>
-            
-            <!-- Dashboard neatly sits below the image on mobile -->
             <div class="lightroom-dashboard">
                 <div class="dashboard-title">
                     <span><i class="fas fa-sliders-h"></i> Live Develop</span>
@@ -641,7 +637,6 @@
         </div>
     </section>
 
-    <!-- Asymmetric Editorial Grid Showcase Section -->
     <section class="showcase-section" id="gallery">
         <div class="showcase-header">
             <h2 class="editorial-title">Selected<br><span>exhibits</span></h2>
@@ -653,9 +648,9 @@
         </div>
 
         <div class="editorial-grid">
-            <!-- Left Asymmetric Stack Column -->
             <div class="grid-column">
-                <div class="art-card" data-cat="live" onclick="launchTheater('images/live-shows.jpg')">
+                
+                <a href="https://niemanphotography.myportfolio.com/live-shows" target="_blank" class="art-card" data-cat="live">
                     <div class="art-img-box ratio-tall">
                         <img src="images/live-shows.jpg" alt="Live Shows Photography">
                     </div>
@@ -663,9 +658,9 @@
                         <h3>Live Shows</h3>
                         <span>Concert / Set</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="art-card" data-cat="portrait" onclick="launchTheater('images/graduations.jpg')">
+                <a href="https://niemanphotography.myportfolio.com/graduations" target="_blank" class="art-card" data-cat="portrait">
                     <div class="art-img-box ratio-wide">
                         <img src="images/graduations.jpg" alt="Graduations Portraiture">
                     </div>
@@ -673,12 +668,11 @@
                         <h3>Graduations</h3>
                         <span>Milestone</span>
                     </div>
-                </div>
+                </a>
             </div>
 
-            <!-- Right Asymmetric Stack Column (Staggered Down) -->
             <div class="grid-column right-col">
-                <div class="art-card" data-cat="live" onclick="launchTheater('images/informal-dines.jpg')">
+                <a href="https://niemanphotography.myportfolio.com/informal-dines" target="_blank" class="art-card" data-cat="live">
                     <div class="art-img-box ratio-wide">
                         <img src="images/informal-dines.jpg" alt="Informal Dines Event">
                     </div>
@@ -686,9 +680,9 @@
                         <h3>Informal Dines</h3>
                         <span>Nightlife</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="art-card" data-cat="all" onclick="launchTheater('images/wildlife.jpg')">
+                <a href="https://niemanphotography.myportfolio.com/wildlife" target="_blank" class="art-card" data-cat="all">
                     <div class="art-img-box ratio-tall">
                         <img src="images/wildlife.jpg" alt="Wildlife Nature Frame">
                     </div>
@@ -696,20 +690,15 @@
                         <h3>Wildlife</h3>
                         <span>Action / Natural</span>
                     </div>
-                </div>
+                </a>
             </div>
+        </div>
+        
+        <div class="portfolio-cta-wrapper">
+            <a href="https://niemanphotography.myportfolio.com/" target="_blank" class="portfolio-cta-btn">Explore Full Portfolio Index</a>
         </div>
     </section>
 
-    <!-- Fullscreen Fluid Theater Modal Layer -->
-    <div id="theater-modal" onclick="dismissTheater()">
-        <div class="theater-close" onclick="dismissTheater()"><i class="fas fa-times"></i></div>
-        <div class="theater-view" onclick="event.stopPropagation()">
-            <img id="theater-src" src="" alt="Active View Frame">
-        </div>
-    </div>
-
-    <!-- Hidden Alternative Rock Overdrive Indicator Dock -->
     <div id="stopstraat-dock">
         <div class="waveform-mock">
             <div class="wave-bar"></div>
@@ -720,7 +709,6 @@
         <span>STOPSTRAAT ALT OVERDRIVE AUDIO MODE INJECTED</span>
     </div>
 
-    <!-- High-Finish Conversion Footer -->
     <footer>
         <div class="footer-grid">
             <h2>Let's build<br><span>assets</span>.</h2>
@@ -734,7 +722,6 @@
         </div>
     </footer>
 
-    <!-- Interactive Experience Script Architecture Block -->
     <script>
         // 1. Real-Time Lightroom Filter Controls Engine
         const imgTarget = document.getElementById('target-hero');
@@ -777,19 +764,7 @@
             });
         }
 
-        // 3. Fullscreen Immersive Theater Operations
-        const modal = document.getElementById('theater-modal');
-        const modalImg = document.getElementById('theater-src');
-
-        function launchTheater(imgSource) {
-            modalImg.src = imgSource;
-            modal.classList.add('visible');
-        }
-        function dismissTheater() {
-            modal.classList.remove('visible');
-        }
-
-        // 4. Easter Egg 2: Alternative Rock Overdrive Mode ('S' Key)
+        // 3. Easter Egg: Alternative Rock Overdrive Mode ('S' Key)
         document.addEventListener('keydown', (e) => {
             if (e.key === 's' || e.key === 'S') {
                 const dock = document.getElementById('stopstraat-dock');
@@ -807,7 +782,7 @@
             }
         });
 
-        // 5. Easter Egg 3: Unlock Local Geolocation Palette
+        // 4. Easter Egg: Unlock Local Geolocation Palette
         function unlockSecretPalette() {
             document.documentElement.style.setProperty('--accent', '#adff2f'); 
             document.getElementById('loc-trigger').style.color = '#adff2f';
